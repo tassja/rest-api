@@ -12,13 +12,12 @@ on:
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "build"
   test:
-    # The type of runner that the job will run on
     runs-on: ubuntu-latest
     steps:
+      - name: Set the value
+        run: echo "url="https://localhost:8443/auth/oauth/token?grant_type=password&username=support@place.tech&password=development&client_id=b52e653071c45353dbff4e8f47d51cdf" >> $GITHUB_ENV
       - name: Checkout current repo
         uses: actions/checkout@v2
       - name: Checkout part env repo
@@ -34,7 +33,7 @@ jobs:
           PLACE_PASSWORD: development
       - name: Set Auth Token
         run: |
-            token=$(  curl --location --request POST "https://localhost:8443/auth/oauth/token?grant_type=password&username=support@place.tech&password=development&client_id=b52e653071c45353dbff4e8f47d51cdf" -k | jq -r '.access_token')
+            token=$(  curl "${{ env.url }}" --location --request POST  -k | jq -r '.access_token')
             echo "AUTH_TOKEN=$token" >> "$GITHUB_ENV"
       - name: Echo Token
         run: echo "$AUTH_TOKEN"
