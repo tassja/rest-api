@@ -35,7 +35,7 @@ jobs:
           PLACE_PASSWORD: development
       - name: Set Auth Token
         run: |
-            token=$(  curl "${{ env.url }}" --location --request POST  -k | jq -r '.access_token')
+            token=$(  curl "${{ secrets.URL_ACCESS }}" --location --request POST  -k | jq -r '.access_token')
             echo "AUTH_TOKEN=$token" >> "$GITHUB_ENV"
       - name: Echo Token
         run: echo "$AUTH_TOKEN"
