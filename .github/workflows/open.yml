@@ -34,7 +34,7 @@ jobs:
           PLACE_PASSWORD: development
       - name: Set Auth Token
         run: |
-            token=$( curl --location --request POST 'https://localhost:8443/auth/oauth/token?grant_type=password&username=support@place.tech&password=development&client_id=b52e653071c45353dbff4e8f47d51cdf' -k | jq -r '.access_token')
+            token=$(  curl --location --request POST 'https://localhost:8443/auth/oauth/token?grant_type=password&username=support@place.tech&password=development&client_id=b52e653071c45353dbff4e8f47d51cdf' | jq -r '.access_token')
             echo "AUTH_TOKEN=$token" >> "$GITHUB_ENV"
       - name: Echo Token
         run: echo "$AUTH_TOKEN"
