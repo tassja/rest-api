@@ -1,4 +1,4 @@
-# PlaceOS REST API
+# PlaceOS REST API 
 
 [![Build Dev Image](https://github.com/PlaceOS/rest-api/actions/workflows/build-dev-image.yml/badge.svg)](https://github.com/PlaceOS/rest-api/actions/workflows/build-dev-image.yml)
 [![CI](https://github.com/PlaceOS/rest-api/actions/workflows/ci.yml/badge.svg)](https://github.com/PlaceOS/rest-api/actions/workflows/ci.yml)
