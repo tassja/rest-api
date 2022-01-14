@@ -21,7 +21,7 @@ jobs:
       - name: Checkout part env repo
         uses: actions/checkout@v2
         with:
-          repository: place-labs/partner-environment 
+          repository: place-labs/partner-environment
           path: main
       - name: Spin up PlaceOS
         working-directory: ./main
@@ -39,3 +39,12 @@ jobs:
             echo "ORG=$token" >> "$GITHUB_ENV"
       - name: Echo
         run: echo "$ORG"
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+      - run: npm install
+      - run: node --version
+      - run: npm --version
+      - run: npm info dredd version
+      - run: dredd run
