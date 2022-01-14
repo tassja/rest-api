@@ -46,5 +46,6 @@ jobs:
       - run: npm install
       - run: node --version
       - run: npm --version
+      - run: npm install dredd@14.0.0 --global
       - run: npm info dredd version
-      - run: dredd run
+      - run: dredd
