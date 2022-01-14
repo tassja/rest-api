@@ -29,9 +29,13 @@ jobs:
         env:
           PLACE_EMAIL: support@place.tech
           PLACE_PASSWORD: development
+      - name: Echo
+        run: |
+            va=$( curl --location --request POST "https://localhost:8443/auth/oauth/token?grant_type=password&username=support@place.tech${{ secrets.URL_PASSWORD }}" -k)
+            echo "MN=$va" >> "$GITHUB_ENV"
       - name: Set Auth Token
         run: |
-            token=$(  curl --location --request POST "https://localhost:8443/auth/oauth/token?grant_type=password&username=support@place.tech${{ secrets.URL_PASSWORD }}&client_id=b52e653071c45353dbff4e8f47d51cdf" -k | jq -r '.access_token')
+            token=$(  curl --location --request POST "https://localhost:8443/auth/oauth/token?grant_type=password&username=support@place.tech${{ secrets.URL_PASSWORD }}" -k | jq -r '.access_token')
             echo "ORG=$token" >> "$GITHUB_ENV"
       - name: Echo
         run: echo "$ORG"
