@@ -29,23 +29,13 @@ jobs:
         env:
           PLACE_EMAIL: support@place.tech
           PLACE_PASSWORD: development
-      - name: Echo
-        run: |
-            va=$( curl --location --request POST "https://localhost:8443/auth/oauth/token?grant_type=password&username=support@place.tech${{ secrets.URL_PASSWORD }}" -k)
-            echo "MN=$va" >> "$GITHUB_ENV"
       - name: Set Auth Token
         run: |
             token=$(  curl --location --request POST "https://localhost:8443/auth/oauth/token?grant_type=password&username=support@place.tech${{ secrets.URL_PASSWORD }}" -k | jq -r '.access_token')
             echo "ORG=$token" >> "$GITHUB_ENV"
-      - name: Echo
-        run: echo "$ORG"
-      - uses: actions/checkout@v2
       - uses: actions/setup-node@v2
         with:
           node-version: '14'
       - run: npm install
-      - run: node --version
-      - run: npm --version
       - run: npm install dredd@14.0.0 --global
-      - run: npm info dredd version
       - run: dredd
