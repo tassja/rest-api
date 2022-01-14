@@ -4,6 +4,16 @@ info:
   title: PlaceOS Rest-API 2
   version: 1.30.2
 paths:
+  /api/engine/v2:
+      get:
+        summary: Healthcheck
+        responses:
+          "200":
+            description: OK
+          "500":
+            description: Internal Server Error
+        security:
+        - bearerAuth: []
   /api/engine/v2/zones:
     get:
       summary: get all zones
